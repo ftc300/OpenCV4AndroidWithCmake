@@ -114,6 +114,39 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.martin.ads.testopencv.activities.SamplesActivity" />
         </activity>
+        <activity
+            android:theme="@style/AppThemeCompat"
+            android:name=".activities.object.ObjectMainActivity"
+            android:label="@string/title_activity_object_main"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation"
+            android:parentActivityName="com.martin.ads.testopencv.activities.SamplesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.martin.ads.testopencv.activities.SamplesActivity" />
+        </activity>
+        <activity
+            android:theme="@style/AppThemeCompat"
+            android:name=".activities.object.ObjectDetectingActivity"
+            android:label="@string/title_activity_object_detection"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation"
+            android:parentActivityName="com.martin.ads.testopencv.activities.SamplesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.martin.ads.testopencv.activities.SamplesActivity" />
+        </activity>
+        <activity
+            android:theme="@style/AppThemeCompat"
+            android:name=".activities.object.ObjectTrackingActivity"
+            android:label="@string/title_activity_object_tracker"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation"
+            android:parentActivityName="com.martin.ads.testopencv.activities.SamplesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.martin.ads.testopencv.activities.SamplesActivity" />
+        </activity>
     </application>
 
 </manifest>

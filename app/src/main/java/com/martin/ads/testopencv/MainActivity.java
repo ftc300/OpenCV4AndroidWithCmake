@@ -15,7 +15,7 @@ import org.opencv.core.Mat;
 
 public class MainActivity extends Activity implements CameraBridgeViewBase.CvCameraViewListener2 {
 
-    private static final String    TAG = "MainActivity";
+    private static final String    TAG = "ObjectMainActivity";
 
     private Mat                    mRgba;
     private Mat                    mIntermediateMat;

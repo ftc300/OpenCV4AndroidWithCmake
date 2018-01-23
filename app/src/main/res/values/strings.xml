@@ -24,4 +24,7 @@
     <string name="title_activity_camera_calibration">Camera Calibration Sample</string>
     <string name="title_activity_puzzle15">Puzzle 15 Sample</string>
     <string name="title_activity_face_detection">Face Detection Sample</string>
+    <string name="title_activity_object_main">Object Analysis</string>
+    <string name="title_activity_object_tracker">Object Tracker</string>
+    <string name="title_activity_object_detection">Object Detection</string>
 </resources>

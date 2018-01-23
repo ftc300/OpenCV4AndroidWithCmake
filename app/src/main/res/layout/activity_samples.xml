@@ -123,6 +123,18 @@
                 android:layout_alignRight="@+id/button7"
                 android:layout_alignEnd="@+id/button7"
                 android:onClick="puzzle15"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Object analysis"
+                android:id="@+id/button9"
+                android:layout_below="@+id/button7"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignRight="@+id/button7"
+                android:layout_alignEnd="@+id/button7"
+                android:onClick="objectAnalysis"/>
         </LinearLayout>
     </ScrollView>
 
