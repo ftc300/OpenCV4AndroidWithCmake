@@ -2,6 +2,7 @@
 #include <opencv2/opencv.hpp>
 #include <bits/stdc++.h>
 #include <android/log.h>
+
 #define  LOG_TAG    "JNI_PART"
 #define LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG, __VA_ARGS__)
 #define LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG, __VA_ARGS__)
@@ -10,7 +11,7 @@
 #define LOGF(...)  __android_log_print(ANDROID_LOG_FATAL,LOG_TAG, __VA_ARGS__)
 using namespace cv;
 using namespace std;
-extern "C"{
+extern "C" {
 jstring Java_com_martin_ads_testopencv_MainActivity_stringFromJNI(
         JNIEnv *env,
         jobject /* this */) {
@@ -19,7 +20,9 @@ jstring Java_com_martin_ads_testopencv_MainActivity_stringFromJNI(
 }
 
 
-void Java_com_martin_ads_testopencv_MainActivity_nativeProcessFrame(JNIEnv*, jobject, jlong addrGray, jlong addrRgba) {
+void
+Java_com_martin_ads_testopencv_MainActivity_nativeProcessFrame(JNIEnv *, jobject, jlong addrGray,
+                                                               jlong addrRgba) {
     Mat &mGr = *(Mat *) addrGray;
     Mat &mRgb = *(Mat *) addrRgba;
     vector<KeyPoint> v;
@@ -38,4 +41,22 @@ void Java_com_martin_ads_testopencv_MainActivity_nativeProcessFrame(JNIEnv*, job
 
 }
 
+}
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_martin_ads_testopencv_activities_Tutorial2Activity_FindFeatures(JNIEnv *env,
+                                                                         jobject instance,
+                                                                         jlong matAddrGr,
+                                                                         jlong matAddrRgba) {
+
+    Mat &mGr = *(Mat *) matAddrGr;
+    Mat &mRgb = *(Mat *) matAddrRgba;
+    vector<KeyPoint> v;
+
+    Ptr<FeatureDetector> detector = FastFeatureDetector::create(50);
+    detector->detect(mGr, v);
+    for (unsigned int i = 0; i < v.size(); i++) {
+        const KeyPoint &kp = v[i];
+        circle(mRgb, Point(kp.pt.x, kp.pt.y), 10, Scalar(255, 0, 0, 255));
+    }
 }

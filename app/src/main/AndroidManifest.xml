@@ -12,10 +12,10 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/app_ico"
         android:label="@string/app_name"
         android:supportsRtl="true">
-        <activity android:name=".HomeActivity"
+        <activity android:name=".activities.SamplesActivity"
             android:theme="@style/AppThemeCompat">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +28,92 @@
             android:screenOrientation="landscape"
             android:configChanges="keyboardHidden|orientation"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity
+            android:name=".activities.Tutorial1Activity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_tutorial1"
+            android:theme="@style/AppThemeCompat"
+            android:parentActivityName="com.martin.ads.testopencv.activities.SamplesActivity"
+            android:screenOrientation="landscape" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.martin.ads.testopencv.activities.SamplesActivity" />
+        </activity>
+        <activity
+            android:theme="@style/AppThemeCompat"
+            android:name="com.martin.ads.testopencv.activities.Tutorial2Activity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_tutorial2"
+            android:parentActivityName="com.martin.ads.testopencv.activities.SamplesActivity"
+            android:screenOrientation="landscape" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.martin.ads.testopencv.activities.SamplesActivity" />
+        </activity>
+        <activity
+            android:theme="@style/AppThemeCompat"
+            android:name="com.martin.ads.testopencv.activities.Tutorial3Activity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_tutorial3"
+            android:parentActivityName="com.martin.ads.testopencv.activities.SamplesActivity"
+            android:screenOrientation="landscape" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.martin.ads.testopencv.activities.SamplesActivity" />
+        </activity>
+        <activity
+            android:theme="@style/AppThemeCompat"
+            android:name="com.martin.ads.testopencv.activities.ImageManipulationsActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_image_manipulations"
+            android:parentActivityName="com.martin.ads.testopencv.activities.SamplesActivity"
+            android:screenOrientation="landscape" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.martin.ads.testopencv.activities.SamplesActivity" />
+        </activity>
+        <activity
+            android:theme="@style/AppThemeCompat"
+            android:name="com.martin.ads.testopencv.activities.ColorBlobDetectionActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_color_blob_detection"
+            android:screenOrientation="landscape"
+            android:parentActivityName="com.martin.ads.testopencv.activities.SamplesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.martin.ads.testopencv.activities.SamplesActivity" />
+        </activity>
+        <activity
+            android:theme="@style/AppThemeCompat"
+            android:name="com.martin.ads.testopencv.activities.CameraCalibrationActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_camera_calibration"
+            android:screenOrientation="landscape"
+            android:parentActivityName="com.martin.ads.testopencv.activities.SamplesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.martin.ads.testopencv.activities.SamplesActivity" />
+        </activity>
+        <activity
+            android:theme="@style/AppThemeCompat"
+            android:name="com.martin.ads.testopencv.activities.Puzzle15Activity"
+            android:label="@string/title_activity_puzzle15"
+            android:parentActivityName="com.martin.ads.testopencv.activities.SamplesActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.martin.ads.testopencv.activities.SamplesActivity" />
+        </activity>
+        <activity
+            android:theme="@style/AppThemeCompat"
+            android:name="com.martin.ads.testopencv.activities.FaceDetectionActivity"
+            android:label="@string/title_activity_face_detection"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboardHidden|orientation"
+            android:parentActivityName="com.martin.ads.testopencv.activities.SamplesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.martin.ads.testopencv.activities.SamplesActivity" />
+        </activity>
     </application>
 
 </manifest>

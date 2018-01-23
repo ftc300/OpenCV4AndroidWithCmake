@@ -135,3 +135,4 @@ target_link_libraries(native-lib android log
     ${log-lib}
     )
 
+#ADD_SUBDIRECTORY(src/main/cpp/face)
