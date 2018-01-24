@@ -60,3 +60,5 @@ Java_com_martin_ads_testopencv_activities_Tutorial2Activity_FindFeatures(JNIEnv 
         circle(mRgb, Point(kp.pt.x, kp.pt.y), 10, Scalar(255, 0, 0, 255));
     }
 }
+
+

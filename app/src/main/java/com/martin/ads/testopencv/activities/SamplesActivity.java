@@ -30,6 +30,7 @@ public class SamplesActivity extends AppCompatActivity {
     private final int REQUEST_CODE7 = 7;
     private final int REQUEST_CODE8 = 8;
     private final int REQUEST_CODE9 = 9;
+    private final int REQUEST_CODE10 = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,9 @@ public class SamplesActivity extends AppCompatActivity {
                         break;
                     case REQUEST_CODE9:
                         startActivity(new Intent(SamplesActivity.this, ObjectMainActivity.class));
+                        break;
+                    case REQUEST_CODE10:
+                        startActivity(new Intent(SamplesActivity.this, ScanWatchActivity.class));
                         break;
                     default:
                         break;
@@ -159,6 +163,9 @@ public class SamplesActivity extends AppCompatActivity {
 
     public void objectAnalysis(View v) {
         mPermissionsManager.checkPermissions(REQUEST_CODE9, PERMISSIONS);
+    }
+    public void scanWatch(View v) {
+        mPermissionsManager.checkPermissions(REQUEST_CODE10, PERMISSIONS);
     }
 
 }
