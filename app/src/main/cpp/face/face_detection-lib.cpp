@@ -274,4 +274,3 @@ jlong imageGray,
     LOGD("Java_com_jnardari_opencv_1androidsamples_utils_DetectionBasedTracker_nativeDetect END");
 
 }
-

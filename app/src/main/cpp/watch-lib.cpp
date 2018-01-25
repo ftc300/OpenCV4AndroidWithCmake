@@ -42,126 +42,126 @@ public:
     bool operator<(const MyLine &A){return k<A.k;}//重定义小于号
     void print(){printf("id: %3d  k: %3d°  l: %3d\n",id,k,l);}//输出函数
 };//自定义直线
-extern "C"
-JNIEXPORT jstring JNICALL
-Java_com_martin_ads_testopencv_activities_ScanWatchActivity_getCurrentTime(JNIEnv *env,
-                                                                           jobject instance,
-                                                                           jlong CannyMat,
-                                                                           jlong GrayMat) {
+//extern "C"
+//JNIEXPORT jstring JNICALL
+//Java_com_martin_ads_testopencv_activities_ScanWatchActivity_getCurrentTime(JNIEnv *env,
+//                                                                           jobject instance,
+//                                                                           jlong CannyMat,
+//                                                                           jlong GrayMat) {
 
 
-
-    Mat &temp = *(Mat *) CannyMat;
-    Mat &dst = *(Mat *) GrayMat;
-    //储存检测圆的容器
-    std::vector<Vec3f> circles;
+//
+//    Mat &temp = *(Mat *) CannyMat;
+//    Mat &dst = *(Mat *) GrayMat;
+//    //储存检测圆的容器
+//    std::vector<Vec3f> circles;
     //调用Hough变换检测圆
     //参数为：待检测图像，检测结果，检测方法（这个参数唯一）,累加器的分辨率，两个圆间的距离，canny门限的上限（下限自动设为上限的一半），圆心所需要的最小的投票数，最大和最小半径
-    HoughCircles(temp,circles,CV_HOUGH_GRADIENT,2,50,200,100,100,300);
+//    HoughCircles(temp,circles,CV_HOUGH_GRADIENT,2,50,200,100,100,300);
     //找出圆盘（因为最大的不一定是的，所以加了几个限制条件）
-    int pos=0;
-    int max=-1;
-    for(size_t i = 0; i < circles.size(); i++ )
-    {
-        Vec3f f=circles[i];
-        if(f[2]>max && f[0]+f[2]<temp.rows && f[0]-f[2]>=0 && f[1]+f[2]<temp.cols && f[1]-f[2]>0)
-        {
-            max=f[2];
-            pos=i;
-        }
-    }
-    Point center(circles[pos][0],circles[pos][1]);//找到的圆心
-    int   radius= circles[pos][2];//找到的半径
-    circle(dst,center,radius,Scalar(255),2);
+//    int pos=0;
+//    int max=-1;
+//    for(size_t i = 0; i < circles.size(); i++ )
+//    {
+//        Vec3f f=circles[i];
+//        if(f[2]>max && f[0]+f[2]<temp.rows && f[0]-f[2]>=0 && f[1]+f[2]<temp.cols && f[1]-f[2]>0)
+//        {
+//            max=f[2];
+//            pos=i;
+//        }
+//    }
+//    Point center(circles[pos][0],circles[pos][1]);//找到的圆心
+//    int   radius= circles[pos][2];//找到的半径
+//    circle(dst,center,radius,Scalar(255),2);
 
-    list<MyLine> list_MyLine;
-    vector<Vec4i> lines2;//线段检测
-    HoughLinesP(temp, lines2, 1, CV_PI/180, 50, 50, 10 );
-    for( size_t i = 0; i < lines2.size(); i++ )
-    {
-        Vec4i l = lines2[i];
-        Point A(l[0], l[1]),B(l[2], l[3]);
-        if(DistancetoSegment(center,A,B)<30)//根据圆心到指针的距离阈值滤掉其他线段
-        {
-            bool down=(A.y+B.y-2*center.y>0);//判断长的在过圆心的水平线上部还是下部
-            if(A.x==B.x){//斜率为无穷的情况
-                list_MyLine.push_back(MyLine(i,90+(down?180:0),Length(Point(A.x-B.x,A.y-B.y))));
-            }else if(A.y==B.y){//水平的情况
-                list_MyLine.push_back(MyLine(i,A.x+B.x-2*center.x>0 ? 0:180,Length(Point(A.x-B.x,A.y-B.y))));
-            }else{
-                if(down){
-                    if(A.y>center.y)
-                        list_MyLine.push_back(MyLine(i,360-atan2(A.y-B.y,A.x-B.x)*180/PI,Length(Point(A.x-B.x,A.y-B.y))));
-                    else
-                        list_MyLine.push_back(MyLine(i,360-atan2(B.y-A.y,B.x-A.x)*180/PI,Length(Point(A.x-B.x,A.y-B.y))));
-                }else{
-                    if(A.y<center.y)
-                        list_MyLine.push_back(MyLine(i,abs(atan2(A.y-B.y,A.x-B.x)*180/PI),Length(Point(A.x-B.x,A.y-B.y))));
-                    else
-                        list_MyLine.push_back(MyLine(i,abs(atan2(B.y-A.y,B.x-A.x)*180/PI),Length(Point(A.x-B.x,A.y-B.y))));
-                }
-            }
-            line(dst,A,B, Scalar(0,0,i*20+40), 2, CV_AA);
-        }
+//    list<MyLine> list_MyLine;
+//    vector<Vec4i> lines2;//线段检测
+//    HoughLinesP(temp, lines2, 1, CV_PI/180, 50, 50, 10 );
+//    for( size_t i = 0; i < lines2.size(); i++ )
+//    {
+//        Vec4i l = lines2[i];
+//        Point A(l[0], l[1]),B(l[2], l[3]);
+//        if(DistancetoSegment(center,A,B)<30)//根据圆心到指针的距离阈值滤掉其他线段
+//        {
+//            bool down=(A.y+B.y-2*center.y>0);//判断长的在过圆心的水平线上部还是下部
+//            if(A.x==B.x){//斜率为无穷的情况
+//                list_MyLine.push_back(MyLine(i,90+(down?180:0),Length(Point(A.x-B.x,A.y-B.y))));
+//            }else if(A.y==B.y){//水平的情况
+//                list_MyLine.push_back(MyLine(i,A.x+B.x-2*center.x>0 ? 0:180,Length(Point(A.x-B.x,A.y-B.y))));
+//            }else{
+//                if(down){
+//                    if(A.y>center.y)
+//                        list_MyLine.push_back(MyLine(i,360-atan2(A.y-B.y,A.x-B.x)*180/PI,Length(Point(A.x-B.x,A.y-B.y))));
+//                    else
+//                        list_MyLine.push_back(MyLine(i,360-atan2(B.y-A.y,B.x-A.x)*180/PI,Length(Point(A.x-B.x,A.y-B.y))));
+//                }else{
+//                    if(A.y<center.y)
+//                        list_MyLine.push_back(MyLine(i,abs(atan2(A.y-B.y,A.x-B.x)*180/PI),Length(Point(A.x-B.x,A.y-B.y))));
+//                    else
+//                        list_MyLine.push_back(MyLine(i,abs(atan2(B.y-A.y,B.x-A.x)*180/PI),Length(Point(A.x-B.x,A.y-B.y))));
+//                }
+//            }
+//            line(dst,A,B, Scalar(0,0,i*20+40), 2, CV_AA);
+//        }
+//
+//    }
+//
+//    //根据角度区分所属指针
+//    int now_k,pre_k=720;//当前线段的角度和前一个线段的角度
+//    int num=0;//指针数（可能为2或3）
+//    int Du[3]={0};//3个指针的度数（每组的平均）
+//    int Le[3]={0};//Le[i]=Le_ping[i]*0.2+le_max[i]*0.8;
+//    int Le_ping[3]={0};//3个指针的长度（每组的平均）
+//    int Le_max[3]={0};//3个指针的长度（每组区最大的）
+//    int t_num=0;//每组的数量（求平均用）
+//    MyLine now_Line;
+//    list_MyLine.push_back(MyLine(99,888,0));//向其中插入一个右边界这样方便处理
+//    list_MyLine.sort();
+//    while(!list_MyLine.empty())
+//    {
+//        now_Line=list_MyLine.front();
+//        now_k=now_Line.k;
+//        if(abs(now_k-pre_k)>10)//两个角度之差小于10°的算是同一类
+//        {
+//            if(num!=0){//对本组的度数和长度求平均
+//                Du[num-1]/=t_num;
+//                Le_ping[num-1]/=t_num;
+//                Le[num-1]=Le_ping[num-1]*0.2+Le_max[num-1]*0.8;
+//            }
+//            if(now_k==888)break;//右边界直接跳出
+//            t_num=0;//重新统计下一组
+//            num++;//组数增加1
+//            cout<<"---------------------------\n";//输出分割线
+//        }
+//        t_num++;//组内多一条线
+//        Du[num-1]+=now_Line.k;
+//        Le_ping[num-1]+=now_Line.l;
+//        if(now_Line.l>Le_max[num-1])Le_max[num-1]=now_Line.l;
+//        now_Line.print();
+//        list_MyLine.pop_front();
+//        pre_k=now_k;
+//    }
+//    cout<<"---------------------------\n\n";
+//
+//    cout<<"---------------------------\n";
+//    int t;
+//    for(int i=0;i<num-1;i++){
+//        for(int j=i+1;j<num;j++){
+//            if(Le[i]>Le[j]){
+//                t=Le[i],Le[i]=Le[j],Le[j]=t;
+//                t=Du[i],Du[i]=Du[j],Du[j]=t;
+//            }//if end
+//        }//for end
+//    }//for end
+//    char s[3][10]={"hour  :","minute:","second:"};
+//    for(int i=0;i<num;i++)
+//        printf("%s  k: %3d°  l: %3d\n",s[i],Du[i],Le[i]);
+//    cout<<"---------------------------\n";
+//    if(num==2)printf("time is: %2d:%2d\n",(360-Du[0]+90)%360/30,(360-Du[1]+90)%360/6);
+//    else if(num==3)printf("time is: %2d:%2d:%2d\n",(360-Du[0]+90)%360/30,(360-Du[1]+90)%360/6,(360-Du[2]+90)%360/6);
+//    cout<<"---------------------------\n";
 
-    }
-
-    //根据角度区分所属指针
-    int now_k,pre_k=720;//当前线段的角度和前一个线段的角度
-    int num=0;//指针数（可能为2或3）
-    int Du[3]={0};//3个指针的度数（每组的平均）
-    int Le[3]={0};//Le[i]=Le_ping[i]*0.2+le_max[i]*0.8;
-    int Le_ping[3]={0};//3个指针的长度（每组的平均）
-    int Le_max[3]={0};//3个指针的长度（每组区最大的）
-    int t_num=0;//每组的数量（求平均用）
-    MyLine now_Line;
-    list_MyLine.push_back(MyLine(99,888,0));//向其中插入一个右边界这样方便处理
-    list_MyLine.sort();
-    while(!list_MyLine.empty())
-    {
-        now_Line=list_MyLine.front();
-        now_k=now_Line.k;
-        if(abs(now_k-pre_k)>10)//两个角度之差小于10°的算是同一类
-        {
-            if(num!=0){//对本组的度数和长度求平均
-                Du[num-1]/=t_num;
-                Le_ping[num-1]/=t_num;
-                Le[num-1]=Le_ping[num-1]*0.2+Le_max[num-1]*0.8;
-            }
-            if(now_k==888)break;//右边界直接跳出
-            t_num=0;//重新统计下一组
-            num++;//组数增加1
-            cout<<"---------------------------\n";//输出分割线
-        }
-        t_num++;//组内多一条线
-        Du[num-1]+=now_Line.k;
-        Le_ping[num-1]+=now_Line.l;
-        if(now_Line.l>Le_max[num-1])Le_max[num-1]=now_Line.l;
-        now_Line.print();
-        list_MyLine.pop_front();
-        pre_k=now_k;
-    }
-    cout<<"---------------------------\n\n";
-
-    cout<<"---------------------------\n";
-    int t;
-    for(int i=0;i<num-1;i++){
-        for(int j=i+1;j<num;j++){
-            if(Le[i]>Le[j]){
-                t=Le[i],Le[i]=Le[j],Le[j]=t;
-                t=Du[i],Du[i]=Du[j],Du[j]=t;
-            }//if end
-        }//for end
-    }//for end
-    char s[3][10]={"hour  :","minute:","second:"};
-    for(int i=0;i<num;i++)
-        printf("%s  k: %3d°  l: %3d\n",s[i],Du[i],Le[i]);
-    cout<<"---------------------------\n";
-    if(num==2)printf("time is: %2d:%2d\n",(360-Du[0]+90)%360/30,(360-Du[1]+90)%360/6);
-    else if(num==3)printf("time is: %2d:%2d:%2d\n",(360-Du[0]+90)%360/30,(360-Du[1]+90)%360/6,(360-Du[2]+90)%360/6);
-    cout<<"---------------------------\n";
-
-    return env->NewStringUTF("");
-}
+//    return env->NewStringUTF("");
+//}
 
 
