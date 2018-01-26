@@ -31,6 +31,7 @@ public class SamplesActivity extends AppCompatActivity {
     private final int REQUEST_CODE8 = 8;
     private final int REQUEST_CODE9 = 9;
     private final int REQUEST_CODE10 = 10;
+    private final int REQUEST_CODE11 = 11;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,9 @@ public class SamplesActivity extends AppCompatActivity {
                         break;
                     case REQUEST_CODE10:
                         startActivity(new Intent(SamplesActivity.this, ScanWatchActivity.class));
+                        break;
+                    case REQUEST_CODE11:
+                        startActivity(new Intent(SamplesActivity.this, WatchDetectionActivity.class));
                         break;
                     default:
                         break;
@@ -166,6 +170,9 @@ public class SamplesActivity extends AppCompatActivity {
     }
     public void scanWatch(View v) {
         mPermissionsManager.checkPermissions(REQUEST_CODE10, PERMISSIONS);
+    }
+    public void watchDetecction(View v) {
+        mPermissionsManager.checkPermissions(REQUEST_CODE11, PERMISSIONS);
     }
 
 }
